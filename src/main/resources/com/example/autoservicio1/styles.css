@@ -1,0 +1,136 @@
+/* General Styles */
+.root {
+    -fx-background-color: #2B2B2B;
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+    -fx-accent: #007BFF;
+}
+
+/* Labels and Text */
+.label {
+    -fx-text-fill: #BBBBBB;
+    -fx-font-size: 14px;
+}
+
+/* Buttons */
+.button {
+    -fx-background-color: #007BFF;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-padding: 8 15;
+}
+
+.button:hover {
+    -fx-background-color: #0056b3;
+}
+
+/* Toolbar */
+.tool-bar {
+    -fx-background-color: #3C3F41;
+    -fx-spacing: 10;
+    -fx-padding: 10;
+}
+
+/* TabPane */
+.tab-pane .tab-header-area .tab-header-background {
+    -fx-background-color: #3C3F41;
+}
+
+.tab-pane .tab {
+    -fx-background-color: #313335;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-padding: 5 15 5 15;
+}
+
+.tab-pane .tab:selected {
+    -fx-background-color: #2B2B2B;
+    -fx-border-color: #007BFF;
+    -fx-border-width: 0 0 2 0;
+}
+
+.tab .tab-label {
+    -fx-text-fill: #BBBBBB;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.tab-content-area {
+    -fx-background-color: #2B2B2B;
+}
+
+/* TableView */
+.table-view {
+    -fx-background-color: #2B2B2B;
+    -fx-border-color: #4A4A4A;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #3C3F41;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #E0E0E0;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.table-view .table-cell {
+    -fx-text-fill: #CCCCCC;
+    -fx-border-color: transparent;
+    -fx-padding: 5px;
+}
+
+.table-view .table-row-cell:odd {
+    -fx-background-color: #313335;
+}
+
+.table-view .table-row-cell:even {
+    -fx-background-color: #2B2B2B;
+}
+
+.table-view .table-row-cell:selected {
+    -fx-background-color: #0056b3;
+}
+
+/* Charts */
+.chart {
+    -fx-padding: 10px;
+}
+.chart-title {
+    -fx-text-fill: #E0E0E0;
+    -fx-font-size: 1.6em;
+}
+.axis-label {
+  -fx-text-fill: #BBBBBB;
+}
+.axis {
+    -fx-tick-label-fill: #BBBBBB;
+}
+
+.chart-pie-label-line {
+    -fx-stroke: #BBBBBB;
+    -fx-fill: #BBBBBB;
+}
+
+.chart-pie-label {
+    -fx-fill: #BBBBBB;
+    -fx-font-size: 1em;
+}
+
+/* Login Screen */
+#errorLabel {
+    -fx-text-fill: #FF6B6B;
+}
+
+.text-field, .password-field {
+    -fx-background-color: #3C3F41;
+    -fx-text-fill: #E0E0E0;
+    -fx-border-color: #4A4A4A;
+    -fx-border-radius: 3;
+    -fx-background-insets: 0;
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #007BFF;
+}

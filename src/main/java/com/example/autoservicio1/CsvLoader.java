@@ -37,10 +37,10 @@ public class CsvLoader {
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
                 Sale sale = new Sale(
-                        Integer.parseInt(values[0]),
-                        Integer.parseInt(values[1]),
+                        values[0],
+                        values[1],
                         values[2],
-                        Integer.parseInt(values[3]),
+                        values[3],
                         values[4],
                         values[5],
                         Integer.parseInt(values[6]),

@@ -3,10 +3,10 @@ package com.example.autoservicio1;
 import java.time.LocalDate;
 
 public class Sale {
-    private int saleId;
-    private int customerId;
+    private String saleId;
+    private String customerId;
     private String customerName;
-    private int productId;
+    private String productId;
     private String productName;
     private String category;
     private int quantity;
@@ -17,7 +17,7 @@ public class Sale {
     private String region;
     private String paymentMethod;
 
-    public Sale(int saleId, int customerId, String customerName, int productId, String productName, String category, int quantity, double unitPrice, double saleAmount, double profit, LocalDate saleDate, String region, String paymentMethod) {
+    public Sale(String saleId, String customerId, String customerName, String productId, String productName, String category, int quantity, double unitPrice, double saleAmount, double profit, LocalDate saleDate, String region, String paymentMethod) {
         this.saleId = saleId;
         this.customerId = customerId;
         this.customerName = customerName;
@@ -33,21 +33,21 @@ public class Sale {
         this.paymentMethod = paymentMethod;
     }
 
-    // Getters and setters for all fields
+    // Getters and setters
 
-    public int getSaleId() {
+    public String getSaleId() {
         return saleId;
     }
 
-    public void setSaleId(int saleId) {
+    public void setSaleId(String saleId) {
         this.saleId = saleId;
     }
 
-    public int getCustomerId() {
+    public String getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(String customerId) {
         this.customerId = customerId;
     }
 
@@ -59,11 +59,11 @@ public class Sale {
         this.customerName = customerName;
     }
 
-    public int getProductId() {
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 

@@ -25,16 +25,16 @@ public class Database {
     }
 
     public static void insertSales(List<Sale> sales) {
-        String sql = "INSERT INTO sales (sale_id, customer_id, customer_name, product_id, product_name, category, quantity, unit_price, sale_amount, profit, sale_date, region, payment_method) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO ventas (sale_id, customer_id, customer_name, product_id, product_name, category, quantity, unit_price, sale_amount, profit, sale_date, region, payment_method) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             for (Sale sale : sales) {
-                pstmt.setInt(1, sale.getSaleId());
-                pstmt.setInt(2, sale.getCustomerId());
+                pstmt.setString(1, sale.getSaleId());
+                pstmt.setString(2, sale.getCustomerId());
                 pstmt.setString(3, sale.getCustomerName());
-                pstmt.setInt(4, sale.getProductId());
+                pstmt.setString(4, sale.getProductId());
                 pstmt.setString(5, sale.getProductName());
                 pstmt.setString(6, sale.getCategory());
                 pstmt.setInt(7, sale.getQuantity());
@@ -54,7 +54,7 @@ public class Database {
 
     public static Map<String, Double> getSalesByPaymentMethod() {
         Map<String, Double> salesByPaymentMethod = new HashMap<>();
-        String sql = "SELECT payment_method, SUM(sale_amount) as total_sales FROM sales GROUP BY payment_method";
+        String sql = "SELECT payment_method, SUM(sale_amount) as total_sales FROM ventas GROUP BY payment_method";
 
         try (Connection conn = getConnection();
              Statement stmt = conn.createStatement();
@@ -71,7 +71,7 @@ public class Database {
 
     public static Map<String, Double> getSalesOverTime() {
         Map<String, Double> salesOverTime = new TreeMap<>();
-        String sql = "SELECT DATE_FORMAT(sale_date, '%Y-%m') as month, SUM(sale_amount) as total_sales FROM sales GROUP BY month ORDER BY month";
+        String sql = "SELECT DATE_FORMAT(sale_date, '%Y-%m') as month, SUM(sale_amount) as total_sales FROM ventas GROUP BY month ORDER BY month";
 
         try (Connection conn = getConnection();
              Statement stmt = conn.createStatement();
@@ -88,7 +88,7 @@ public class Database {
 
     public static Map<String, Double> getTotalSalesByCategory() {
         Map<String, Double> salesByCategory = new LinkedHashMap<>();
-        String sql = "SELECT category, SUM(sale_amount) as total_sales FROM sales GROUP BY category ORDER BY total_sales DESC";
+        String sql = "SELECT category, SUM(sale_amount) as total_sales FROM ventas GROUP BY category ORDER BY total_sales DESC";
         try (Connection conn = getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
@@ -103,7 +103,7 @@ public class Database {
 
     public static Map<String, Double> getAvgProfitByCategory() {
         Map<String, Double> profitByCategory = new LinkedHashMap<>();
-        String sql = "SELECT category, AVG(profit) as avg_profit FROM sales GROUP BY category ORDER BY avg_profit DESC";
+        String sql = "SELECT category, AVG(profit) as avg_profit FROM ventas GROUP BY category ORDER BY avg_profit DESC";
         try (Connection conn = getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
@@ -118,7 +118,7 @@ public class Database {
 
     public static Map<String, Integer> getQuantityByRegion() {
         Map<String, Integer> quantityByRegion = new LinkedHashMap<>();
-        String sql = "SELECT region, SUM(quantity) as total_quantity FROM sales GROUP BY region ORDER BY total_quantity DESC";
+        String sql = "SELECT region, SUM(quantity) as total_quantity FROM ventas GROUP BY region ORDER BY total_quantity DESC";
         try (Connection conn = getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
@@ -133,7 +133,7 @@ public class Database {
 
     public static List<Map<String, Object>> getTop10Customers() {
         List<Map<String, Object>> topCustomers = new ArrayList<>();
-        String sql = "SELECT customer_name, SUM(sale_amount) as total_spent FROM sales GROUP BY customer_name ORDER BY total_spent DESC LIMIT 10";
+        String sql = "SELECT customer_name, SUM(sale_amount) as total_spent FROM ventas GROUP BY customer_name ORDER BY total_spent DESC LIMIT 10";
         try (Connection conn = getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
@@ -151,7 +151,7 @@ public class Database {
 
     public static List<Map<String, Object>> getTop10Products() {
         List<Map<String, Object>> topProducts = new ArrayList<>();
-        String sql = "SELECT product_name, SUM(quantity) as total_quantity FROM sales GROUP BY product_name ORDER BY total_quantity DESC LIMIT 10";
+        String sql = "SELECT product_name, SUM(quantity) as total_quantity FROM ventas GROUP BY product_name ORDER BY total_quantity DESC LIMIT 10";
         try (Connection conn = getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {

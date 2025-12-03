@@ -39,7 +39,8 @@ public class LoginController {
                 // Successful login
                 try {
                     FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("main-view.fxml"));
-                    Scene scene = new Scene(fxmlLoader.load(), 1024, 768);
+                    Scene scene = new Scene(fxmlLoader.load(), 1200, 800);
+                    scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
                     Stage stage = (Stage) usernameField.getScene().getWindow();
                     stage.setScene(scene);
                     stage.setTitle("Sales Dashboard");

@@ -65,10 +65,14 @@ public class MainController {
 
     private void setupTables() {
         // Sales table
-        TableColumn<Sale, Integer> saleIdCol = new TableColumn<>("Sale ID");
+        TableColumn<Sale, String> saleIdCol = new TableColumn<>("Sale ID");
         saleIdCol.setCellValueFactory(new PropertyValueFactory<>("saleId"));
+        TableColumn<Sale, String> customerIdCol = new TableColumn<>("Customer ID");
+        customerIdCol.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         TableColumn<Sale, String> customerNameCol = new TableColumn<>("Customer Name");
         customerNameCol.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        TableColumn<Sale, String> productIdCol = new TableColumn<>("Product ID");
+        productIdCol.setCellValueFactory(new PropertyValueFactory<>("productId"));
         TableColumn<Sale, String> productNameCol = new TableColumn<>("Product Name");
         productNameCol.setCellValueFactory(new PropertyValueFactory<>("productName"));
         TableColumn<Sale, String> categoryCol = new TableColumn<>("Category");
@@ -87,7 +91,7 @@ public class MainController {
         regionCol.setCellValueFactory(new PropertyValueFactory<>("region"));
         TableColumn<Sale, String> paymentMethodCol = new TableColumn<>("Payment Method");
         paymentMethodCol.setCellValueFactory(new PropertyValueFactory<>("paymentMethod"));
-        salesTable.getColumns().addAll(saleIdCol, customerNameCol, productNameCol, categoryCol, quantityCol, unitPriceCol, saleAmountCol, profitCol, saleDateCol, regionCol, paymentMethodCol);
+        salesTable.getColumns().addAll(saleIdCol, customerIdCol, customerNameCol, productIdCol, productNameCol, categoryCol, quantityCol, unitPriceCol, saleAmountCol, profitCol, saleDateCol, regionCol, paymentMethodCol);
         salesTable.setItems(salesData);
 
         // Top Customers table
@@ -109,16 +113,16 @@ public class MainController {
 
     private void loadSalesFromDatabase() {
         salesData.clear();
-        String sql = "SELECT * FROM sales";
+        String sql = "SELECT * FROM ventas";
         try (Connection conn = Database.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 salesData.add(new Sale(
-                        rs.getInt("sale_id"),
-                        rs.getInt("customer_id"),
+                        rs.getString("sale_id"),
+                        rs.getString("customer_id"),
                         rs.getString("customer_name"),
-                        rs.getInt("product_id"),
+                        rs.getString("product_id"),
                         rs.getString("product_name"),
                         rs.getString("category"),
                         rs.getInt("quantity"),
