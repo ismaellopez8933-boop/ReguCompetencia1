@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.autoservicio1.MainController">
+    <top>
+        <ToolBar>
+            <Button text="Cargar CSV" onAction="#handleLoadCsv"/>
+            <Button text="Exportar a PDF" onAction="#handleExportPdf"/>
+        </ToolBar>
+    </top>
+    <center>
+        <TabPane>
+            <tabs>
+                <Tab text="Datos de Ventas">
+                    <content>
+                        <TableView fx:id="salesTable"/>
+                    </content>
+                </Tab>
+                <Tab text="Dashboard">
+                    <content>
+                        <GridPane hgap="10" vgap="10" style="-fx-padding: 10;">
+                            <columnConstraints>
+                                <ColumnConstraints percentWidth="50.0"/>
+                                <ColumnConstraints percentWidth="50.0"/>
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints minHeight="300"/>
+                                <RowConstraints minHeight="300"/>
+                                <RowConstraints minHeight="300"/>
+                            </rowConstraints>
+                            <children>
+                                <PieChart fx:id="paymentMethodChart" title="Ventas por Método de Pago" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                                <LineChart fx:id="salesOverTimeChart" title="Ventas a través del Tiempo" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                    <xAxis>
+                                        <CategoryAxis label="Mes"/>
+                                    </xAxis>
+                                    <yAxis>
+                                        <NumberAxis label="Total de Ventas"/>
+                                    </yAxis>
+                                </LineChart>
+                                <BarChart fx:id="salesByCategoryChart" title="Total de Ventas por Categoría" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                    <xAxis><CategoryAxis label="Categoría"/></xAxis>
+                                    <yAxis><NumberAxis label="Total Ventas"/></yAxis>
+                                </BarChart>
+                                <BarChart fx:id="profitByCategoryChart" title="Beneficio Medio por Categoría" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <xAxis><CategoryAxis label="Categoría"/></xAxis>
+                                    <yAxis><NumberAxis label="Beneficio Medio"/></yAxis>
+                                </BarChart>
+                                <BarChart fx:id="quantityByRegionChart" title="Cantidad Vendida por Región" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                                    <xAxis><CategoryAxis label="Región"/></xAxis>
+                                    <yAxis><NumberAxis label="Cantidad Total"/></yAxis>
+                                </BarChart>
+                            </children>
+                        </GridPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
+</BorderPane>
