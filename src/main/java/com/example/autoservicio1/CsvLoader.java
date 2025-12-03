@@ -1,8 +1,5 @@
 package com.example.autoservicio1;
 
-import com.example.autoservicio1.Database;
-import com.example.autoservicio1.Sale;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -14,11 +11,14 @@ import java.util.List;
 
 public class CsvLoader {
 
-    public static void loadCsvInThread(File file) {
+    public static void loadCsvInThread(File file, Runnable onFinished) {
         Thread thread = new Thread(() -> {
             try {
                 List<Sale> sales = readSalesFromCsv(file);
                 Database.insertSales(sales);
+                if (onFinished != null) {
+                    onFinished.run();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -54,6 +54,6 @@ public class CsvLoader {
                 sales.add(sale);
             }
         }
-        return sales;
+        return sales.subList(0, Math.min(sales.size(), 1000));
     }
 }

@@ -32,15 +32,13 @@ application {
 
 javafx {
     version = "21.0.6"
-    modules = listOf("javafx.controls", "javafx.fxml")
+    modules = listOf("javafx.controls", "javafx.fxml", "javafx.graphics")
 }
 
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
-    implementation("com.github.librepdf:openpdf:1.3.30")
     implementation("mysql:mysql-connector-java:8.0.33")
-    implementation("com.opencsv:opencsv:5.9")
     implementation("com.itextpdf:kernel:8.0.2")
     implementation("com.itextpdf:layout:8.0.2")
     implementation("org.apache.poi:poi-ooxml:5.2.5")

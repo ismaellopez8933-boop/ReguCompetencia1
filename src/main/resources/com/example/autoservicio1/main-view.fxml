@@ -20,6 +20,7 @@
         <ToolBar>
             <Button text="Cargar CSV" onAction="#handleLoadCsv"/>
             <Button text="Exportar a PDF" onAction="#handleExportPdf"/>
+            <Button text="Exportar a Excel" onAction="#handleExportExcel"/>
         </ToolBar>
     </top>
     <center>
@@ -66,6 +67,16 @@
                                 </BarChart>
                             </children>
                         </GridPane>
+                    </content>
+                </Tab>
+                <Tab text="Top 10 Clientes">
+                    <content>
+                        <TableView fx:id="topCustomersTable"/>
+                    </content>
+                </Tab>
+                <Tab text="Top 10 Productos">
+                    <content>
+                        <TableView fx:id="topProductsTable"/>
                     </content>
                 </Tab>
             </tabs>

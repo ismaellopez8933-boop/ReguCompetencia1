@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -128,5 +129,41 @@ public class Database {
             e.printStackTrace();
         }
         return quantityByRegion;
+    }
+
+    public static List<Map<String, Object>> getTop10Customers() {
+        List<Map<String, Object>> topCustomers = new ArrayList<>();
+        String sql = "SELECT customer_name, SUM(sale_amount) as total_spent FROM sales GROUP BY customer_name ORDER BY total_spent DESC LIMIT 10";
+        try (Connection conn = getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                Map<String, Object> customer = new HashMap<>();
+                customer.put("name", rs.getString("customer_name"));
+                customer.put("totalSpent", rs.getDouble("total_spent"));
+                topCustomers.add(customer);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return topCustomers;
+    }
+
+    public static List<Map<String, Object>> getTop10Products() {
+        List<Map<String, Object>> topProducts = new ArrayList<>();
+        String sql = "SELECT product_name, SUM(quantity) as total_quantity FROM sales GROUP BY product_name ORDER BY total_quantity DESC LIMIT 10";
+        try (Connection conn = getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                Map<String, Object> product = new HashMap<>();
+                product.put("name", rs.getString("product_name"));
+                product.put("totalQuantity", rs.getInt("total_quantity"));
+                topProducts.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return topProducts;
     }
 }
